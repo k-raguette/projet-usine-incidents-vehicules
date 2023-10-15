@@ -277,7 +277,7 @@ server.post('/submit', async function (req, res) {
         headerTemplate: '<span></span>', // Ajouter un en-tête vide
         footerTemplate: '<div style="position: fixed;right: 0; font-size: 15px;margin-right: 20px;"><span class="pageNumber"></span></div>', // Ajouter un pied de page avec numéro de page
         margin: { top: 70, bottom: 70 },
-        format: 'A4',
+        format: 'A4', printBackground: true,
        });
 
         await browser.close();
