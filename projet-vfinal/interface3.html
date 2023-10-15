@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <title>Véhicule | choix</title> 
+    <link rel="stylesheet" href="./styles/interface3.css">     
+    <script src="jquery-3.7.1.min.js"></script>
+    <script type = "text/javascript">
+        $(document).ready(function(){
+            $('.choix').click(function(){
+                $('.fold').toggleClass('active')
+            })
+        })
+    </script>
+</head>
+<body>
+   
+    <div class="container">
+        <div class="choix">Cliquez ici pour choisir votre véhicule</div>
+        <div class="fold">
+            <form action="/submit" method="post">
+                <input type="text" class="input" placeholder="Poste" required>
+                <input type="text" class="input" placeholder="Ordre" required>
+                <label for=""> Véhicule</label>
+                <select id="vehiclesDropDown" name="vehicule"></select>
+                <div class="input-field">
+                    <input type="submit" class="submit" value="Envoyer">
+                </div>                                 
+
+            </form>
+        </div>
+        <script> 
+            const countriesDropDown = document.getElementById("vehiclesDropDown");
+            // var optionArray = ["Peugeot", "Renault", "DS3", "BMW X6", "Audi Q7","Mercedes class S", "alpha romeo"];
+            
+            // for (let vehicle of optionArray) {
+            //     let option = document.createElement("option");
+            //     option.setAttribute('value', optionArray[vehicle]);
+            //     let optionText = document.createTextNode(vehicle);
+            //     option.appendChild(optionText);
+            //     countriesDropDown.appendChild(option);  
+            // }           
+            // Récupérer les données de l'API
+            fetch('/vehicules')
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                data.forEach(vehicule  => {
+                const option = document.createElement('option');
+                option.value = vehicule.vehicule_id; // ou tout autre champ approprié
+                option.textContent = vehicule.vehicule_desc; // ou tout autre champ approprié
+                // listeDeDonnees.appendChild(option);
+                countriesDropDown.appendChild(option);
+
+                });
+
+            })
+
+            .catch(error => console.error(error)); 
+        </script>
+
+    </div>
+
+   
+</body>
+</html>
